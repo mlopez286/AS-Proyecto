@@ -1,5 +1,6 @@
 from ubuntu
 
-COPY sesion_LS.sh .
+COPY sesion_LS.sh ./sesion_LS.sh
+RUN apt -qq update && apt -qq -y install curl
 
-RUN sesion_LS.sh
+CMD bash sesion_LS.sh
