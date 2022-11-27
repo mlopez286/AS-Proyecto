@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+#################### SERVIDOR LIGHTSTREAMER ###########################
+  server-ls:
+    build:
+      context: ./Dockerfile_LS
+      dockerfile: Dockerfile
+    
+    networks:
+      lightstreamer-net:
+        ipv4_address: 192.168.0.2
+    
+    ports:
+      - "8080:8080"
+    #  - "80:80"
+      
+    restart: on-failure
+  
+############################# SESIÓN -LS ##############################
+  sesion-ls:
+    build:
+      context: ./Dockerfile_sesion
+      dockerfile: Dockerfile
+    
+    networks:
+      lightstreamer-net:
+        ipv4_address: 192.168.0.3
+          
+    depends_on:
+      - server-ls
+      
+    restart: on-failure
+
+    volumes:
+      - infoSesion:/data
+
+  
+############################# CLIENTE -LS #############################
+  cliente-ls:
+    build:
+      context: ./Dockerfile_cliente
+      dockerfile: Dockerfile
+      
+    networks:
+      lightstreamer-net:
+        ipv4_address: 192.168.0.4
+      
+    depends_on:
+      - sesion-ls
+      
+    restart: on-failure
+
+    volumes:
+      - infoSesion:/data
+
+#####################################################################
+networks:
+  lightstreamer-net:
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+volumes:
+  infoSesion:
+  
