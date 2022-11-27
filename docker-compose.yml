@@ -1,65 +1,78 @@
 version: '3'
 
 services:
-#################### SERVIDOR LIGHTSTREAMER ###########################
+####################### SERVIDOR LIGHTSTREAMER ########################
   server-ls:
+  # Se va a construir a partir del fichero /Dockerfile_LS/Dockerfile
     build:
       context: ./Dockerfile_LS
       dockerfile: Dockerfile
-    
+  # Se le va a proporcionar una IP estática (192.168.0.2)
     networks:
       lightstreamer-net:
         ipv4_address: 192.168.0.2
-    
+  # Se redirige el puerto 8080 del contenedor al puerto 8080 de
+  # localhost (para ver la página de Lightstreamer)
     ports:
       - "8080:8080"
-    #  - "80:80"
-      
+  # En caso de error se reinicia el contenedor
     restart: on-failure
   
 ############################# SESIÓN -LS ##############################
   sesion-ls:
+    # Se va a construir a partir del fichero /Dockerfile_sesion/-
+    #Dockerfile
     build:
       context: ./Dockerfile_sesion
       dockerfile: Dockerfile
-    
+    # Se le va a proporcionar una IP estática (192.168.0.3)
     networks:
       lightstreamer-net:
         ipv4_address: 192.168.0.3
-          
+   # Define que el contenedor "server-ls" se tiene que ejecutar antes
+   # (si no no puede crear una sesión)
     depends_on:
       - server-ls
-      
+   # En caso de error se reinicia el contenedor  
     restart: on-failure
-
+   # Hace uso de un volumen al que se accede mediante /data 
     volumes:
       - infoSesion:/data
 
   
 ############################# CLIENTE -LS #############################
   cliente-ls:
+    # Se va a construir a partir del fichero /Dockerfile_cliente/-
+    # Dockerfile
     build:
       context: ./Dockerfile_cliente
       dockerfile: Dockerfile
-      
+    # Se le va a proporcionar una IP estática (192.168.0.4)
     networks:
       lightstreamer-net:
         ipv4_address: 192.168.0.4
-      
+    # Define que el contenedor "sesion-ls" se tiene que ejecutar antes
+    # (si no, no tiene el ID de sesión para enviar los mensajes) 
     depends_on:
       - sesion-ls
-      
+   # En caso de error se reinicia el contenedor 
     restart: on-failure
-
+   # Hace uso de un volumen al que se accede mediante /data
     volumes:
       - infoSesion:/data
 
-#####################################################################
+###################### CONF. GENERALES ##########################
+# Se detalla la configuración de la red Docker:
+#	* nombre :  lightstreamer-net
+#	* subred :  192.168.0.0/24
 networks:
   lightstreamer-net:
     ipam:
       config:
         - subnet: 192.168.0.0/24
+        
+# Se detalla la configuración del volumen utilizado:
+#	* nombre :  infoSesion
 volumes:
   infoSesion:
   
