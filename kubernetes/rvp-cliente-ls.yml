@@ -1,0 +1,13 @@
+##################################################
+#   RECLAMACIÓN VOLUMEN PERSISTENTE cliente-ls   #
+##################################################
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rvp-cliente-ls
+spec:
+  accessModes:
+    - ReadWriteMany
+   resources:
+     requests:
+       storage: 2Gi 

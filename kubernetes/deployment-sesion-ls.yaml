@@ -1,0 +1,52 @@
+###################################
+#       DEPLOYMENT sesion-ls      #
+###################################
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  # Nombre del objeto deployment
+  name: deployment-sesion-ls
+
+# Especificaciones del objeto deployment
+spec:
+  # Número de pods idénticos
+  replicas: 1
+  selector:
+    matchLabels:
+      # Etiqueta para identificar el objeto
+      modulo: sesion
+      
+# Plantilla a seguir para crear los Pods
+  template:
+    metadata:
+      labels:
+        # Etiqueta para identificar el objeto
+        modulo: sesion
+    # Especificaciones del contenedor que ejecutará el pod
+    spec:
+      # Definir la reclamación de volumen persistente
+      volumes:
+        # Nombre del volumen
+        - name: vp-infosesion
+          persistentVolumeClaim:
+            # Debe coincidir con el nombre asignado en el 
+            # fichero de reclamación del volumen persistente
+            claimName: rvp-sesion-ls
+      containers:
+      # Nombre del pod
+      - name: pod-sesion-ls
+        # Imagen base para crear el contenedor
+        image: maiteupv/sesion-ls
+        # Exponer el puerto 8080
+        #ports:
+        #- containerPort: 8080
+        #Definir el punto de montaje del volumen
+        volumeMounts:
+          # Nombre del volumen
+          - name: vp-infosesion
+            # Punto de montaje en el contenedor
+            mountPath: /data
+            # Ruta para guardar los datos en el volumen
+            subPath: data
