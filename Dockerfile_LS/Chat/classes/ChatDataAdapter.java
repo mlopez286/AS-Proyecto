@@ -227,7 +227,7 @@ public class ChatDataAdapter implements SmartDataProvider {
         long raw_timestamp = now.getTime();
         
 
-        logger.debug(timestamp + "|New message: " + IP + "->" + nick + "->" + message);
+        logger.debug(timestamp + "|Nuevo mensaje: " + IP + "->" + nick + "->" + message);
 
         final HashMap<String, String> update = new HashMap<String, String>();
         update.put("nick", nick);

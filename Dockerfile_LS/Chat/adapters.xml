@@ -1,54 +1,36 @@
 <?xml version="1.0"?>
 
+<!--Nombre del Set de Adaptadores: CHAT-->
 <adapters_conf id="CHAT">
 
-  <!--
-    Not all configuration options of an Adapter Set are exposed by this file.
-    You can easily expand your configurations using the generic template,
-    `DOCS-SDKs/sdk_adapter_java_inprocess/doc/adapter_conf_template/adapters.xml`,
-    as a reference.
-  -->
 
     <metadata_adapter_initialised_first>Y</metadata_adapter_initialised_first>
 
+<!-- ###########################  CONFIGURA EL META ADAPTADOR ######################## -->
     <metadata_provider>
 
+<!-- Importa las dependencias (clases de java)-->
         <adapter_class>com.lightstreamer.examples.chat_demo.adapters.ChatMetadataAdapter</adapter_class>
-
-        <!-- Optional, managed by the inherited LiteralBasedProvider.
-             See LiteralBasedProvider javadoc. -->
-        <!--
-        <param name="max_bandwidth">40</param>
-        <param name="max_frequency">3</param>
-        <param name="buffer_size">30</param>
-        <param name="prefilter_frequency">5</param>
-        <param name="allowed_users">user123,user456</param>
-        -->
         <param name="distinct_snapshot_length">30</param>
 
-        <!-- Optional, managed by the inherited LiteralBasedProvider.
-             See LiteralBasedProvider javadoc. -->
+        <!-- Define un item llamado "chat_room" y establece que se actualizará en MODO DISTINC, es decir, 
+             Cada actualización en tiempo real agrega un nueva fila al item -->
         <param name="item_family_1">chat_room.*</param>
         <param name="modes_for_item_family_1">DISTINCT</param>
 
     </metadata_provider>
 
-
+<!-- ###########################  CONFIGURA EL ADAPTADOR DE DATOS ######################## -->
     <data_provider name="CHAT_ROOM">
-
+    
+<!-- Importa las dependencias (clases de java)-->
         <adapter_class>com.lightstreamer.examples.chat_demo.adapters.ChatDataAdapter</adapter_class>
 
-        <!-- Optional for ChatDataAdapter.
-             Configuration flag for periodic flush of the snapshot.
-             Default: false. -->
 
+	<!-- Flag opcional para limpiar datos del sistema-->
         <param name="flush_snapshot">true</param>
 
-        <!-- Optional for ChatDataAdapter.
-             Configuration interval in millis for snapshot flush.
-             Default: 30 minutes. -->
-        <!-- <param name="flush_snapshot_interval">1800000</param> -->
-
+ 
     </data_provider>
 
 

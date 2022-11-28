@@ -1,7 +1,7 @@
 # Imagen base
-from lightstreamer
+FROM lightstreamer
 
-# Copiar el adaptador a la carpeta correspondiente
+# Copiar el set adaptador a la carpeta correspondiente
 COPY Chat /lightstreamer/adapters/Chat
-EXPOSE 80
+
 EXPOSE 8080
