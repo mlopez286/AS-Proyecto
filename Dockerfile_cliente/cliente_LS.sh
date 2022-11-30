@@ -4,8 +4,8 @@
 #-------------------------
 aux=/data/infoSesion.txt
 # IP del servidor Lightstreamer
-ip="192.168.0.2:8080"
-
+#ip="192.168.0.2:8080"
+ip="server-ls:8080"
 # Hace un poco de tiempo para que sesion-ls pueda crear la sesión y almacenar el ID
 sleep 10 
 # Conseguir el ID de sesión almacenado en /data/infoSesion.txt
@@ -35,7 +35,6 @@ do
         echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
  
  	curl -v -N -X POST -d "LS_session=$sesionID&LS_message=CHAT|$mensaje&LS_outcome=false&LS_reqId=1" $ip/lightstreamer/msg.txt?LS_protocol=TLCP-2.0.0
-	# Espera 1 segundo entre mensaje y mensaje
 	sleep 1 
 
 done

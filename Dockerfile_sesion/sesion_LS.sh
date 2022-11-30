@@ -5,9 +5,9 @@ info=/data/infoSesion.txt
 
 #ip=http://localhost:8080
 # IP del servidor Lightstreamer
-ip="192.168.0.2:8080"
-
-
+#ip="192.168.0.2:8080"
+ip="server-ls:8080"
+#puerto=":8080
 # Meter un pequeño tiempo para que el servidor Lightstreamer se haya creado y configurado correctamente
 sleep 5
 echo ""
