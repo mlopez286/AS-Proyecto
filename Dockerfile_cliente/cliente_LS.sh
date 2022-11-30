@@ -7,7 +7,7 @@ aux=/data/infoSesion.txt
 ip="192.168.0.2:8080"
 
 # Hace un poco de tiempo para que sesion-ls pueda crear la sesión y almacenar el ID
-sleep 20 
+sleep 10 
 # Conseguir el ID de sesión almacenado en /data/infoSesion.txt
 sesionID=$(cat $aux | head -n 1 | cut -d ',' -f 2) 
 
@@ -35,6 +35,7 @@ do
         echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
  
  	curl -v -N -X POST -d "LS_session=$sesionID&LS_message=CHAT|$mensaje&LS_outcome=false&LS_reqId=1" $ip/lightstreamer/msg.txt?LS_protocol=TLCP-2.0.0
+	# Espera 1 segundo entre mensaje y mensaje
 	sleep 1 
 
 done
@@ -46,14 +47,16 @@ echo "####################################################################"
 echo "#                         LOG DE LA SESIÓN                         #"
 echo "####################################################################"
 echo " "
-echo "El otro cliente (contenedor sesion-ls) no imprime contenido en esta terminal porque "
-echo "está redireccionando el output a un fichero."
+echo "El otro cliente (contenedor sesion-ls) no imprime contenido en esta terminal "
+echo "porque está redireccionando el output a un fichero."
 echo "Este fichero se llama infoSesion.txt y se encuentra almacenado en un volumen."
 echo ""
 echo "  > Su contenido se imprimirá a continuación:"
-
+echo ""
 sleep 15
 
 echo ""
+echo "CONEXIÓN OK | ID SESIÓN | LÍMITE SOLICITUD | T MANTENIMIENTO | ENLACE DE CONTROL"
+echo "--------------------------------------------------------------------------------"
 # Imprime el log de la sesión que ha guardado el otro cliente.
 cat $aux
