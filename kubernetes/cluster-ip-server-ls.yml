@@ -6,7 +6,7 @@ apiVersion: v1
 kind: Service
 metadata:
   # Nombre del Cluster IP
-  name: 192.168.0.2
+  name: server-ls
 spec:
   # Tipo de objeto a crear
   type: ClusterIP
