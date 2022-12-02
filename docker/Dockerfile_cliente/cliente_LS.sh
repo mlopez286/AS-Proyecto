@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Variables
-#-------------------------
+# Ruta del log
 aux=/data/infoSesion.txt
+
 # IP del servidor Lightstreamer
-#ip="192.168.0.2:8080"
 ip="server-ls:8080"
+
 # Hace un poco de tiempo para que sesion-ls pueda crear la sesión y almacenar el ID
 sleep 10 
+
 # Conseguir el ID de sesión almacenado en /data/infoSesion.txt
 sesionID=$(cat $aux | head -n 1 | cut -d ',' -f 2) 
 
@@ -52,6 +53,8 @@ echo "Este fichero se llama infoSesion.txt y se encuentra almacenado en un volum
 echo ""
 echo "  > Su contenido se imprimirá a continuación:"
 echo ""
+
+# Tiempo para leer el texto
 sleep 15
 
 echo ""

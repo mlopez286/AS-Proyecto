@@ -9,10 +9,7 @@ services:
     build:
       context: ./Dockerfile_LS
       dockerfile: Dockerfile
-  # Se le va a proporcionar una IP estática (192.168.0.2)
-    #networks:
-    #  lightstreamer-net:
-    #    ipv4_address: 192.168.0.2
+  
   # Se redirige el puerto 8080 del contenedor al puerto 8080 de
   # localhost (para ver la página de Lightstreamer)
     ports:
@@ -29,10 +26,7 @@ services:
     build:
       context: ./Dockerfile_sesion
       dockerfile: Dockerfile
-    # Se le va a proporcionar una IP estática (192.168.0.3)
-    #networks:
-    #  lightstreamer-net:
-    #    ipv4_address: 192.168.0.3
+   
    # Define que el contenedor "server-ls" se tiene que ejecutar antes
    # (si no no puede crear una sesión)
     depends_on:
@@ -53,10 +47,7 @@ services:
     build:
       context: ./Dockerfile_cliente
       dockerfile: Dockerfile
-    # Se le va a proporcionar una IP estática (192.168.0.4)
-    #networks:
-    #  lightstreamer-net:
-    #    ipv4_address: 192.168.0.4
+  
     # Define que el contenedor "sesion-ls" se tiene que ejecutar antes
     # (si no, no tiene el ID de sesión para enviar los mensajes) 
     depends_on:
@@ -68,15 +59,7 @@ services:
       - infoSesion:/data
 
 ###################### CONF. GENERALES ##########################
-# Se detalla la configuración de la red Docker:
-#	* nombre :  lightstreamer-net
-#	* subred :  192.168.0.0/24
-#networks:
-#  lightstreamer-net:
-#    ipam:
-#      config:
-#        - subnet: 192.168.0.0/24
-        
+
 # Se detalla la configuración del volumen utilizado:
 #	* nombre :  infoSesion
 volumes:

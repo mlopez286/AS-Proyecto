@@ -1,10 +1,10 @@
-#Imagen base
+# Imagen base
 FROM ubuntu
 
-# Instalar CURL
+# Actualizar e instalar CURL
 RUN apt -qq update && apt -qq -y install curl
 
-#Copiar el script al contenedor
+# Copiar el script al contenedor
 COPY cliente_LS.sh ./cliente_LS.sh
 
 # Ejecutar el script
