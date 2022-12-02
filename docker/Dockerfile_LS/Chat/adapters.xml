@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!--Nombre del Set de Adaptadores: CHAT-->
+<adapters_conf id="CHAT">
+
+
+    <metadata_adapter_initialised_first>Y</metadata_adapter_initialised_first>
+
+<!-- ###########################  CONFIGURA EL META ADAPTADOR ######################## -->
+    <metadata_provider>
+
+<!-- Importa las dependencias (clases de java)-->
+        <adapter_class>com.lightstreamer.examples.chat_demo.adapters.ChatMetadataAdapter</adapter_class>
+        <param name="distinct_snapshot_length">30</param>
+
+        <!-- Define un item llamado "chat_room" y establece que se actualizará en MODO DISTINC, es decir, 
+             Cada actualización en tiempo real agrega un nueva fila al item -->
+        <param name="item_family_1">chat_room.*</param>
+        <param name="modes_for_item_family_1">DISTINCT</param>
+
+    </metadata_provider>
+
+<!-- ###########################  CONFIGURA EL ADAPTADOR DE DATOS ######################## -->
+    <data_provider name="CHAT_ROOM">
+    
+<!-- Importa las dependencias (clases de java)-->
+        <adapter_class>com.lightstreamer.examples.chat_demo.adapters.ChatDataAdapter</adapter_class>
+
+
+	<!-- Flag opcional para limpiar datos del sistema-->
+        <param name="flush_snapshot">true</param>
+
+ 
+    </data_provider>
+
+
+</adapters_conf>
