@@ -1,0 +1,39 @@
+###################################
+#       DEPLOYMENT server-ls      #
+###################################
+
+apiVersion: apps/v1
+# Tipo de objeto
+kind: Deployment
+
+metadata:
+  # Nombre del objeto deployment
+  name: server-ls
+  
+# Especificaciones del objeto deployment
+spec:
+  # Número de pods idénticos
+  replicas: 1
+  selector:
+    matchLabels:
+      # Etiqueta para identificar el objeto
+      modulo: server-ls
+  
+# Plantilla a seguir para crear los Pods
+  template:
+    metadata:
+     # Etiqueta para identificar el objeto
+      labels:
+        modulo: server-ls
+    # Especificaciones del contenedor que ejecutará el pod
+    spec:
+      containers:
+        # Imagen base para crear el contenedor
+        - image: maiteupv/server-ls
+          # Nombre del pod
+          name: server-ls
+          # Exponer el puerto 8080
+          ports:
+            - containerPort: 8080
+      # Política de reinicio : Siempre
+      restartPolicy: Always

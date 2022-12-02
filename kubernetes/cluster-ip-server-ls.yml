@@ -12,7 +12,7 @@ spec:
   type: ClusterIP
   # Objetos a los que se aplica 
   selector:
-    modulo: server
+    modulo: server-ls
     # Configuración de puertos
   ports:
   # Puerto para que otros Pods se conecten

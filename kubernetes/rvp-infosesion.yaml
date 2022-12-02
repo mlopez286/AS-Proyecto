@@ -1,0 +1,18 @@
+##################################################
+#   RECLAMACIÓN VOLUMEN PERSISTENTE sesion-ls    #
+##################################################
+apiVersion: v1
+# Tipo de objeto
+kind: PersistentVolumeClaim
+
+metadata:
+  name: infosesion
+
+spec:
+  # Más de un nodo puede leer y escribir
+  accessModes:
+    - ReadWriteMany
+  # Capacidad
+  resources:
+    requests:
+      storage: 100Mi

@@ -1,0 +1,55 @@
+###################################
+#      DEPLOYMENT cliente-ls      #
+###################################
+
+apiVersion: apps/v1
+# Tipo de objeto deployment
+kind: Deployment
+
+
+metadata:
+  labels:
+    modulo: cliente-ls
+  # Nombre del objeto deployment
+  name: cliente-ls
+ 
+# Especificaciones del objeto deployment
+spec:
+  # Número de pods idénticos
+  replicas: 1
+  selector:
+    matchLabels:
+      # Etiqueta para identificar el objeto
+      modulo: cliente-ls
+  
+  # Plantilla a seguir para crear los Pods
+  template:
+    metadata:
+       # Etiqueta para identificar el objeto
+      labels:
+        modulo: cliente-ls
+    # Especificaciones del contenedor que ejecutará el pod
+    spec:
+      containers:
+        # Imagen base para crear el contenedor
+        - image: maiteupv/cliente-ls
+        # Nombre del pod
+          name: cliente-ls
+          
+          #Definir el punto de montaje del volumen
+          volumeMounts:
+            # Punto de montaje en el contenedor
+            - mountPath: /data
+              # Nombre del volumen
+              name: infosesion
+      # Política de reinicio: Siempre
+      restartPolicy: Always
+      
+      # Definir el uso de un volumen persistente
+      volumes:
+        # Nombre del volumen
+        - name: infosesion
+          persistentVolumeClaim:
+            # Debe coincidir con el nombre asignado en el
+            # fichero de reclamación del volumen persistente
+            claimName: infosesion
