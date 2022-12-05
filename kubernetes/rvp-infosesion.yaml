@@ -1,6 +1,6 @@
-##################################################
-#   RECLAMACIÓN VOLUMEN PERSISTENTE sesion-ls    #
-##################################################
+#########################################
+#   RECLAMACIÓN VOLUMEN PERSISTENTE     #
+#########################################
 apiVersion: v1
 # Tipo de objeto
 kind: PersistentVolumeClaim

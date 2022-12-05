@@ -16,7 +16,7 @@ sesionID=$(cat $aux | head -n 1 | cut -d ',' -f 2)
 curl -v -N -X POST -d "LS_op=add&LS_subId=1&LS_data_adapter=CHAT_ROOM&LS_group=chat_room&LS_schema=timestamp message&LS_mode=DISTINCT&LS_session=$sesionID&LS_reqId=1" $ip/lightstreamer/control.txt?LS_protocol=TLCP-2.0.0
 
 
-# Publicar 100 mensajes en el item "chat_room"(timestamp, message). Se enviarán 100 mensajes con la forma "Mensaje: X" siendo X un número aleatorio.
+# Publicar 100 mensajes en el item "chat_room"(con los campos "timestamp" y "message"). Se enviarán 100 mensajes con la forma "Mensaje: X" siendo X un número aleatorio.
 # Esperará 1s entre mensajes.
 lista=$(seq {1,100})
 mensaje=""
@@ -47,7 +47,7 @@ echo "####################################################################"
 echo "#                         LOG DE LA SESIÓN                         #"
 echo "####################################################################"
 echo " "
-echo "El otro cliente (contenedor sesion-ls) no imprime contenido en esta terminal "
+echo "El otro cliente (contenedor sesion-ls) no imprime contenido en su terminal "
 echo "porque está redireccionando el output a un fichero."
 echo "Este fichero se llama infoSesion.txt y se encuentra almacenado en un volumen."
 echo ""

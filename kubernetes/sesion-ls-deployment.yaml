@@ -6,6 +6,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
+  # Etiqueta para identificar el objeto
   labels:
     modulo: sesion-ls
   # Nombre del objeto deployment

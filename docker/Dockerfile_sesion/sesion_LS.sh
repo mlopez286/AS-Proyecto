@@ -19,5 +19,5 @@ en /data/infoSesion.txt (dentro del contenedor)."
 echo "-------------------------------------------------------------------------"
 echo ""
 
-# Crear una sesión con el comando curl y volcar el output al fichero sesionInfo.txt que se alojará en un volumen
+# Crear una sesión con el comando curl y volcar el output al fichero infoSesion.txt que se alojará en un volumen
 curl -o $info -v -N -X POST -d "LS_adapter_set=CHAT&LS_cid=mgQkwtwdysogQz2BJ4Ji%20kOj2Bg" $ip/lightstreamer/create_session.txt?LS_protocol=TLCP-2.0.0 

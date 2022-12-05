@@ -1,0 +1,23 @@
+####################################
+#    CLUSTER IP de pod-server-ls   #
+####################################
+
+apiVersion: v1
+kind: Service
+metadata:
+  # Nombre del Cluster IP
+  name: server-ls
+spec:
+  # Tipo de objeto a crear
+  type: ClusterIP
+  # Objetos a los que se aplica 
+  selector:
+    modulo: server-ls
+    # Configuración de puertos
+  ports:
+  # Puerto para que otros Pods se conecten
+  # a los objetos definidos en selector
+  - port: 8080
+  # Puerto de los objetos selector a los 
+  # que redirigir el tráfico
+    targetPort: 8080
