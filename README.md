@@ -1,4 +1,4 @@
-# AS-Proyecto
+# AS-Proyecto - Maite López
 ## Proyecto individual de Administración de Sistemas - [Curso 22-23]
 
 El trabajo consiste en crear un chat que utiliza como servidor la plataforma **Lightstreamer**. 
